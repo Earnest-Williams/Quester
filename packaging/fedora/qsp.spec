@@ -13,6 +13,7 @@ BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  make
 BuildRequires:  pkgconfig
+BuildRequires:  pkgconfig(oniguruma)
 BuildRequires:  oniguruma-devel
 
 %description
@@ -25,6 +26,7 @@ against QSP.
 
 %build
 %cmake %{_cmake_opts}
+(cd %{_vpath_builddir} && grep -E "/usr/lib.*/libonig\\.so" CMakeFiles/CMakeOutput.log)
 %cmake_build
 
 %install
