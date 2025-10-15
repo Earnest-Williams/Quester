@@ -19,7 +19,11 @@ BuildRequires:  oniguruma-devel
 %description
 QSP is an engine for creating and running text-based quest games. This package
 provides the shared library and C headers required to build applications
-against QSP.
+against QSP. Fedora ships only the optimized upstream release build, compiled
+without the `_DEBUG` flag that would enable the bundled GPL-2.0-or-later
+MemWatch debugger; the shipped binaries therefore remain under MPL-2.0 and BSD
+licenses. Rebuilding with debug instrumentation would introduce GPL-2.0-or-
+later licensing obligations for the resulting artifacts.
 
 %prep
 %autosetup -n %{name}-%{version}
