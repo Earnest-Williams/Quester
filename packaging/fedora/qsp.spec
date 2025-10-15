@@ -33,6 +33,12 @@ later licensing obligations for the resulting artifacts.
 (cd %{_vpath_builddir} && grep -E "/usr/lib.*/libonig\\.so" CMakeFiles/CMakeOutput.log)
 %cmake_build
 
+%check
+pushd packaging/fedora/tests
+gcc $(pkg-config --cflags oniguruma) -I../.. check_onig_encoding.c -o check_onig_encoding $(pkg-config --libs oniguruma)
+./check_onig_encoding
+popd
+
 %install
 %cmake_install
 
