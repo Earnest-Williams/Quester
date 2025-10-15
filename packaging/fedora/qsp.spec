@@ -35,7 +35,7 @@ later licensing obligations for the resulting artifacts.
 
 %check
 pushd packaging/fedora/tests
-gcc $(pkg-config --cflags oniguruma) -I../.. check_onig_encoding.c -o check_onig_encoding $(pkg-config --libs oniguruma)
+gcc $(pkg-config --cflags oniguruma) -I../../.. check_onig_encoding.c -o check_onig_encoding $(pkg-config --libs oniguruma)
 ./check_onig_encoding
 popd
 
