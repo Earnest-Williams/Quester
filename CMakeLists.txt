@@ -115,15 +115,19 @@ if (BUILD_JAVA)
 	set_property(TARGET qsp PROPERTY C_STANDARD 11)
 	target_compile_definitions(qsp PRIVATE _JAVA)
 	if (NOT ANDROID)
-		find_package(JNI)
-		target_include_directories(qsp PRIVATE ${JNI_INCLUDE_DIRS})
-		target_link_libraries(qsp PRIVATE ${JNI_LIBRARIES})
-	endif()
+        find_package(JNI)
+        target_include_directories(qsp PRIVATE ${JNI_INCLUDE_DIRS})
+        target_link_libraries(qsp PRIVATE ${JNI_LIBRARIES})
+        endif()
 endif()
 
+find_package(Threads REQUIRED)
+target_link_libraries(qsp PRIVATE Threads::Threads)
+target_compile_definitions(qsp PRIVATE $<$<CONFIG:Debug>:HAVE_PTHREAD_H>)
+
 target_include_directories(qsp
-	INTERFACE
-		"$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/qsp/bindings/default>"
+        INTERFACE
+                "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/qsp/bindings/default>"
 		"$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/qsp/bindings>"
 		"$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>"
 		"$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/qsp>"
